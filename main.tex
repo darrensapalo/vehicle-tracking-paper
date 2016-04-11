@@ -66,6 +66,7 @@
 \documentclass[conference]{IEEEtran}
 \usepackage{blindtext, graphicx}
 \usepackage{hyperref}
+\usepackage{multirow}
 % Add the compsoc option for Computer Society conferences.
 %
 % If IEEEtran.cls has not been installed into the LaTeX system files,
@@ -610,7 +611,7 @@ By using the $exp$ function, the linearity values of a vehicle is bounded betwee
 \subsection{Vehicle classification}
 
 This research classifies vehicles into 6 classes: sedan, bus, jeep, truck, SUV, and others.  \cite{Jun-Wei} classifies vehicles based on a vehicle template library. A template has the values of the features (size and linearity) and the corresponding vehicle classification. 
-\begin{table}[ht!]
+\begin{table}[]
 \centering
 \caption{Template instances per class}
 \label{template_instances}
@@ -621,7 +622,7 @@ Count  & 250    & 52  & 53    & 14     & 238  & 153    \\ \hline
 \end{tabular}
 \end{table}
 
-Table~\ref{template_instances} shows the number of template instances per class in the vehicle template library. A limitation in the dataset is the minimal templates available for instances of trucks, jeeps, and buses. Table~\ref{classification_results} shows the actual number of vehicles per class that were present in the dataset.
+Table~\ref{template_instances} shows the number of template instances per class in the vehicle template library. A limitation in the dataset is the minimal templates available for instances of trucks, jeeps, and buses..
 
 To classify a vehicle, the mean and the variance of the templates within a vehicle class $VC_k$ is acquired. Given the $j$th template $V_j^k$ of vehicle class $k$, the mean of the $r$th feature is defined as:
 
@@ -658,26 +659,27 @@ The classification given to a vehicle $H_i$ is the class with the highest probab
 
 \section{Results}
 
-The performance evaluation of the vehicle classification and counting is recorded using the EDSA dataset which contains 3567 frames. The total number of vehicles counted by the system was 116 vehicles, while the actual number of vehicles is 105.
+The performance evaluation of the vehicle classification and counting is recorded using the EDSA dataset which contains 3567 frames. The total number of vehicles counted by the system was 111 vehicles, while the actual number of vehicles is 105.
 
-Table~\ref{classification_results} shows the performance of the vehicle classification on six (6) classes. 
+Table~\ref{cm:sedan} to Table~\ref{cm:others} shows the confusion matrices of each of the classifiers. This is presented in the Figure~\ref{fig_classifier_performance} as an overview of classifier performances.
 
-\begin{table}[ht!]
+\begin{figure}[!ht]
 \centering
-\caption{Vehicle classification results}
-\label{classification_results}
-\begin{tabular}{|l|l|l|l|l|l|l|}
-\hline
-       & Sedans & Bus & Jeeps & Trucks & SUVs & Others \\ \hline
-Actual & 50     & 6   & 4     & 2      & 19   & 24     \\ \hline
-Count  & 47     & 26  & 10    & 6      & 4    & 23     \\ \hline
-\end{tabular}
-\end{table}
+\includegraphics[width=3in]{classification_performance.png}
+\caption{Accuracy, precision, recall performance of classifiers}
+\label{fig_classifier_performance}
+\end{figure}
 
-The results showed good performance for tracking sedans and other vehicles but did not perform as well on the other classes such as buses, jeeps, trucks, and SUVs. This may be attributed to the low number of template instances encoded into the vehicle template library as seen in table~\ref{template_instances}. The low number of encoded instances is directly affected by the low number of vehicles that were actually in the dataset, seen in table~\ref{classification_results}.
+The results showed good performance for tracking sedans and other vehicles but did not perform as well on the other classes such as buses, jeeps, trucks, and SUVs. This may be attributed to the low number of template instances for jeeps, trucks, and SUVs encoded into the vehicle template library as seen in table~\ref{template_instances}. The low number of encoded template instances was directly affected by the low number of vehicles that were actually in the dataset, seen in Table~\ref{cm:jeep} to Table~\ref{cm:suv}.
 
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=3in]{Fscore.png}
+\caption{F score performance of classifiers}
+\label{fig_fscore_performance}
+\end{figure}
 
-One of the causes of high number of incorrectly classified buses is the inherent problem of occlusion in computer vision which is not part of the scope of this research. As seen in figure~\ref{fig_occlusion}, vehicles near each other may cause the segmentation process to incorrectly detect separate vehicles as connected blobs. This greatly affects bus classification which highly relies on its size feature.
+Figure~\ref{fig_fscore_performance} shows the F-score performance of the classifiers. The results show that only Sedan, Bus, and Others had an F-score that is above 0.70. Trucks had a lower F-score because it had a low recall and precision of 66.67\% and 15.38\% respectively. 
 
 \begin{figure}[!ht]
 \centering
@@ -686,12 +688,106 @@ One of the causes of high number of incorrectly classified buses is the inherent
 \label{fig_occlusion}
 \end{figure}
 
+One of the causes of incorrectly classified buses is the inherent problem of occlusion in computer vision which is not part of the scope of this research. As seen in figure~\ref{fig_occlusion}, vehicles near each other may cause the segmentation process to incorrectly detect separate vehicles as connected blobs. This greatly affects bus classification which highly relies on its size feature.
+
+
+\begin{table}[]
+\centering
+\caption{Sedan classification confusion matrix}
+\label{cm:sedan}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Sedan}} & \multicolumn{2}{c|}{Prediction} \\ \cline{3-4} 
+\multicolumn{2}{|c|}{}                       & False          & True           \\ \hline
+\multirow{2}{*}{Actual}         & False      & 50             & 10             \\ \cline{2-4} 
+                                & True       &  3             & 51             \\ \hline
+\end{tabular}
+\end{table}
+
+The Sedan classifier had an accuracy rate of 88.60\%, recall of 94.44\%, and precision of 83.61\%. Its error rate was 11.40\% with specificity of 83.33\%. 
+
+\begin{table}[]
+\centering
+\caption{Bus classification confusion matrix}
+\label{cm:bus}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Bus}} & \multicolumn{2}{c|}{Prediction}  \\ \cline{3-4} 
+\multicolumn{2}{|c|}{}                       & False          & True          \\ \hline
+\multirow{2}{*}{Actual}         & False      & 101            & 1             \\ \cline{2-4} 
+                                & True       & 0              & 9             \\ \hline
+\end{tabular}
+\end{table}
+
+The Bus classifier had an accuracy rate of 99.10\%, recall of 100\%, and precision of 90\%. Its error rate was 0.90\% with specificity of 99.02\%. 
+
+\begin{table}[]
+\centering
+\caption{Jeep classification confusion matrix}
+\label{cm:jeep}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Jeep}} & \multicolumn{2}{c|}{Prediction} \\ \cline{3-4} 
+\multicolumn{2}{|c|}{}                       & False          & True           \\ \hline
+\multirow{2}{*}{Actual}         & False      & 98             & 11             \\ \cline{2-4} 
+                                & True       &  1             &  2             \\ \hline
+\end{tabular}
+\end{table}
+
+The Jeep classifier had an accuracy rate of 91.30\%, recall of 55.56\%, and precision of 45.45\%. Its error rate was 8.70\% with specificity of 94.34\%. 
+
+\begin{table}[]
+\centering
+\caption{Truck classification confusion matrix}
+\label{cm:truck}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Truck}} & \multicolumn{2}{c|}{Prediction} \\ \cline{3-4} 
+\multicolumn{2}{|c|}{}                       & False          & True           \\ \hline
+\multirow{2}{*}{Actual}         & False      & 98             & 11             \\ \cline{2-4} 
+                                & True       &  1             &  2             \\ \hline
+\end{tabular}
+\end{table}
+
+The Truck classifier had an accuracy rate of 89.29\%, recall of 66.67\%, and precision of 15.38\%. Its error rate was 10.71\% with specificity of 89.91\%. 
+
+\begin{table}[]
+\centering
+\caption{SUV classification confusion matrix}
+\label{cm:suv}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{SUV}} & \multicolumn{2}{c|}{Prediction} \\ \cline{3-4} 
+\multicolumn{2}{|c|}{}                       & False          & True           \\ \hline
+\multirow{2}{*}{Actual}         & False      & 93             &  1              \\ \cline{2-4} 
+                                & True       & 16             & 17             \\ \hline
+\end{tabular}
+\end{table}
+
+The Sedan classifier had an accuracy rate of 86.61\%, recall of 51.52\%, and precision of 94.44\%. Its error rate was 13.39\% with specificity of 98.94\%. 
+
+\begin{table}[]
+\centering
+\caption{Others classification confusion matrix}
+\label{cm:others}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Others}} & \multicolumn{2}{c|}{Prediction} \\ \cline{3-4} 
+\multicolumn{2}{|c|}{}                       & False          & True           \\ \hline
+\multirow{2}{*}{Actual}         & False      & 85             &  7              \\ \cline{2-4} 
+                                & True       &  4             & 19             \\ \hline
+\end{tabular}
+\end{table}
+
+The Others classifier had an accuracy rate of 90.43\%, recall of 82.61\%, and precision of 73.08\%. Its error rate was 9.57\% with specificity of 92.39\%. 
+
+
 Figure~\ref{fig_template_visualization} shows a visualization of the instances in the vehicle template library, showing the size (y axis) and the linearity (x axis) of the instances and colored by class. 
 
 \begin{figure}[!ht]
 \centering
 % \includegraphics[width=2.5in]{myfigure}
-\includegraphics[width=3in]{visualization_templates_4.png}
+\includegraphics[width=3in]{classification_performance.png}
 % where an .eps filename suffix will be assumed under latex, 
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
