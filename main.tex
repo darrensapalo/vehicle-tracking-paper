@@ -408,6 +408,7 @@ Intelligent traffic systems, image processing, vehicle classification, vehicle c
 A goal of intelligent transportation systems is to extract traffic information such as traffic density from video streams of traffic \cite{Jun-Wei}. Traffic surveillance systems aim to detect, track, and classify vehicles. Being able to detect and classify vehicles can aid in estimating traffic density and pollution levels in cities and can help traffic enforcers coordinate traffic flow.
 
 \section{Methodology}
+\label{sec:methodology}
 The vehicle identification and classification approach is based on the research of \cite{Jun-Wei}.
 
 \subsection{Data Collection}
@@ -618,11 +619,11 @@ This research classifies vehicles into 6 classes: sedan, bus, jeep, truck, SUV, 
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
        & Sedans & Bus & Jeeps & Trucks & SUVs & Others \\ \hline
-Count  & 250    & 52  & 53    & 14     & 238  & 153    \\ \hline
+Count  & 26     & 28  & 21    & 24     & 78   & 35     \\ \hline
 \end{tabular}
 \end{table}
 
-Table~\ref{template_instances} shows the number of template instances per class in the vehicle template library. A limitation in the dataset is the minimal templates available for instances of trucks, jeeps, and buses..
+Table~\ref{template_instances} shows the number of template instances per class in the vehicle template library. A limitation in the dataset is the minimal templates available for instances of trucks, jeeps, and buses, because there were few of these vehicles found in the dataset.
 
 To classify a vehicle, the mean and the variance of the templates within a vehicle class $VC_k$ is acquired. Given the $j$th template $V_j^k$ of vehicle class $k$, the mean of the $r$th feature is defined as:
 
@@ -659,27 +660,27 @@ The classification given to a vehicle $H_i$ is the class with the highest probab
 
 \section{Results}
 
-The performance evaluation of the vehicle classification and counting is recorded using the EDSA dataset which contains 3567 frames. The total number of vehicles counted by the system was 111 vehicles, while the actual number of vehicles is 105.
+The performance evaluation of the vehicle classification and counting is recorded using the EDSA dataset which contains 3567 frames. The total number of vehicles counted by the system was 111 vehicles, while the actual number of vehicles is 105. Of the 111 vehicles detected, there were four (4) cases of incorrectly detected vehicles caused by faulty segmentation (e.g. detecting the sidewalk as a vehicle) and there were four (4) instances of occlusion detected (e.g. in one instance/blob there were multiple vehicles).
 
-Table~\ref{cm:sedan} to Table~\ref{cm:others} shows the confusion matrices of each of the classifiers. This is presented in the Figure~\ref{fig_classifier_performance} as an overview of classifier performances.
+Table~\ref{cm:sedan} to Table~\ref{cm:others} shows the confusion matrices of each of the classifiers. This information is presented as an overview in Figure~\ref{fig_classifier_performance} showing the accuracy, precision, recall, and f-score of the classifiers.
 
-\begin{figure}[!ht]
+\begin{figure*}[!ht]
 \centering
-\includegraphics[width=3in]{classification_performance.png}
-\caption{Accuracy, precision, recall performance of classifiers}
+\includegraphics[scale=0.8]{classification_performance.png}
+\caption{Classification performance including the accuracy, precision, recall, and f-score of the vehicle classifiers}
 \label{fig_classifier_performance}
-\end{figure}
+\end{figure*}
 
-The results showed good performance for tracking sedans and other vehicles but did not perform as well on the other classes such as buses, jeeps, trucks, and SUVs. This may be attributed to the low number of template instances for jeeps, trucks, and SUVs encoded into the vehicle template library as seen in table~\ref{template_instances}. The low number of encoded template instances was directly affected by the low number of vehicles that were actually in the dataset, seen in Table~\ref{cm:jeep} to Table~\ref{cm:suv}.
+The results showed good performance for tracking classes such as sedans, buses, and others. However, classification did not perform as well on the other classes such as jeeps, trucks, and SUVs. This may be attributed to the low number of template instances for jeeps, trucks, and SUVs encoded into the vehicle template library as seen in table~\ref{template_instances}. The low number of encoded template instances was directly affected by the low number of vehicles that were actually in the dataset, seen in Table~\ref{cm:jeep} to Table~\ref{cm:suv}.
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=3in]{Fscore.png}
-\caption{F score performance of classifiers}
+\caption{The sedan, bus, and others were the classes above 0.7.}
 \label{fig_fscore_performance}
 \end{figure}
 
-Figure~\ref{fig_fscore_performance} shows the F-score performance of the classifiers. The results show that only Sedan, Bus, and Others had an F-score that is above 0.70. Trucks had a lower F-score because it had a low recall and precision of 66.67\% and 15.38\% respectively. 
+Figure~\ref{fig_fscore_performance} shows the F-score performance of the classifiers. The results show that only Sedan, Bus, and Others had an F-score that is above 0.70. Trucks had a lower F-score because it had a low recall and precision of 66.67\% and 15.38\% respectively, which is attributed to its few instances in the vehicle template library. 
 
 \begin{figure}[!ht]
 \centering
@@ -782,24 +783,28 @@ The Sedan classifier had an accuracy rate of 86.61\%, recall of 51.52\%, and pre
 The Others classifier had an accuracy rate of 90.43\%, recall of 82.61\%, and precision of 73.08\%. Its error rate was 9.57\% with specificity of 92.39\%. 
 
 
-Figure~\ref{fig_template_visualization} shows a visualization of the instances in the vehicle template library, showing the size (y axis) and the linearity (x axis) of the instances and colored by class. 
+Figure~\ref{fig_template_visualization} shows a visualization of the instances in the vehicle template library, showing the size (y axis) and the linearity (x axis) of the instances and colored by class. The visualization shows the high variance in the features of sedan instances (green) as seen in their varying sizes ranging from $size = 0.2$ to $size = 0.7$. Bus instances (light purple) were distant from the main cluster and are easily discriminated by their large size. Two clusters of the other instances (red) can easily be seen: one that clusters around $size = 1$ which is interpreted to be van instances, and one that clusters around $size = 0.25$ which is interpreted to be motorcycle instances. With the number of vehicle instances in the dataset for SUVs (orange), trucks (black), and jeeps(yellow), the results show that their size and linearity features are clustered together and are not yet sufficient for classification.
 
-\begin{figure}[!ht]
+\begin{figure*}[!ht]
 \centering
 % \includegraphics[width=2.5in]{myfigure}
-\includegraphics[width=3in]{classification_performance.png}
+\includegraphics[scale=0.9]{template_library.png}
 % where an .eps filename suffix will be assumed under latex, 
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
-\caption{An excerpt of the visualization plotting the clustering of instances in the vehicle template library. }
+\caption{A scatter plot showing the clusters of the classes in the vehicle template library.}
 \label{fig_template_visualization}
-\end{figure}
+\end{figure*}
 
-The visualization shows the high variance in the features of sedan instances (green) as seen in their varying sizes. Bus instances (blue) were distant from the main cluster and are easily discriminated by their large size. Two clusters of the other instances (red) can easily be seen: one that clusters around $size = 1$ which is interpreted to be van instances, and one that clusters around $size = 0.25$ which is interpreted to be motorcycle instances. With the number of vehicle instances in the dataset for SUVs (orange), trucks (gray), and jeeps(yellow), the results show that their size and linearity features are clustered together and are not yet sufficient for classification.
 
-\section{Contribution}
 
-This research was able to develop a system for vehicle classification and counting. It has three (3) modules: core, annotation, and evaluation. The core module is capable of performing the classification approach described in section~\ref{}. However, classification on a new video dataset will mean that it will have a new camera perspective. A different camera perspective means that the features recorded on one dataset is different for another dataset. To allow the user to encode new entries to the vehicle template library, the annotation module allows the user to give the true classifications for blobs collected from a dataset. The last module is the evaluation module, which allows the user to annotate the classification performance of the system.  video dataset by capturing vehicles and its features, analysis, and evaluation
+\section{Research Contribution}
+
+This research was able to develop a system for vehicle classification and counting which is made available online. It has three (3) modules: core, annotation\footnote{The core and annotation module: http://www.github.com/darrensapalo/vehicle-classification}, and evaluation\footnote{The evaluation module: https://github.com/darrensapalo/vehicle-tracking-performance-analysis}. The core module is capable of performing vehicle classification as described in section~\ref{sec:methodology}.
+
+To use this vehicle classification system on a new video dataset will mean that the camera will have a new perspective. A different camera perspective means that the features in a vehicle template library recorded from one dataset will be different for another dataset. To allow the user to encode new entries to the vehicle template library, the annotation module allows the user to (1) detect vehicles, (2) view the values of their features, and (3) give the correct classifications. This annotation process populates the vehicle template library which is used for classification.
+
+The last module is the evaluation module which allows the user to analyze the classification performance of the system. When the core module is run to perform classification, a directory can be specified to store the captured raw image, segmented image, and the raw image with the linearity feature. This aids the researcher in analyzing what affected the tracking. Figure~\ref{fig_evaluation_module} shows a sample image from the evaluation module. 
 
 % Note that IEEE does not put floats in the very first column - or typically
 % anywhere on the first page for that matter. Also, in-text middle ("here")
@@ -810,7 +815,7 @@ This research was able to develop a system for vehicle classification and counti
 
 \section{Conclusion}
 
-This research was able to collect and analyze vehicle datasets, to identify common problems in vehicle traffic datasets in the context of the Philippines, and to implement a variation of \cite{Jun-Wei}'s vehicle identification and classification system. Results of the classification and the visualization of the vehicle template library confirm that sedan and motorcycle classification shows promising clustering results. The main challenge of bus classification is the problem of occlusion, while other classes (jeep, truck, SUVs) require more data instances to improve the classification or more blob/vehicle features to be introduced.
+This research was able to collect and analyze vehicle datasets, to identify common problems in vehicle traffic datasets in the context of the Philippines, and to implement a variation of \cite{Jun-Wei}'s vehicle identification and classification system with an average accuracy of 90.88\%, an average recall of 75.13\%, an average precision of 66.99\%. The average f-score over all the classes was 67.10\%. Results of the classification and the visualization of the vehicle template library confirm that the sedan, motorcycle, and bus classification shows promising clustering results. The main challenge of bus classification is detecting occlusion, while other classes (jeep, truck, SUVs) require more data instances to improve the classification or more blob/vehicle features to be introduced.
 
 Noise in vehicle traffic dataset include occlusion problems caused by electrical wires. A challenge in background modeling is the common occurrence for vehicles such as jeeps, buses, and shuttles to park either because they are boarding or alighting passengers or because of traffic stop-lights. Also, the dataset shows that there are vehicles that park in the middle of two lanes, for as long as twenty seconds just to board, alight, and wait for passengers. 
 
@@ -818,9 +823,25 @@ Noise in vehicle traffic dataset include occlusion problems caused by electrical
 
 Various improvements can be made with this research. A larger dataset can be collected and more instances encoded in the vehicle template library to improve the performance of the vehicle classification approach. Future works can study other properties of blobs (such as convexity) to see if there are other features that can be used aside from size and linearity. Vehicle classification under different settings such as varying weather conditions (sunny, rainy, cloudy) or varying traffic conditions (traffic stand-still) can be explored. The main algorithm for vehicle detection and classification will need to adapt when performed on a dataset that has heavy stand-still traffic, because the background modeling approach used in this research will not be as effective on slow or non-moving vehicles. 
 
-\clearpage
-
 \appendices
+\section{Evaluation module}
+
+Figures~\ref{fig_evaluation_module} shows a screenshot of the evaluation module which is used to annotate the true classifications and acquire the confusion matrices of the classifiers. A vehicle instance shows its current ID, the frame it was detected from, the raw image, the segmented image, and the up slanted edges $U_{H_i}$ used to acquire the linearity feature.
+
+\begin{figure}[!h]
+\centering
+% \includegraphics[width=2.5in]{myfigure}
+\includegraphics[scale=0.9]{evaluation_module.png}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{A screenshot of the evaluation module.}
+\label{fig_evaluation_module}
+\end{figure}
+
+Using the UP and DOWN keys, the user can go through the various vehicles captured in the dataset and press numerical keys to classify the instance as sedan (1), bus (2), jeep (3), truck (4), SUV (5), or others (6). If the detected blob was not a vehicle (e.g. sidewalk) the user could press E to classify it as a segmentation error. If there was occlusion (e.g. multiple vehicles in one blob), then the user could press O to record it as occlusion. Once the annotation is finished, the user can get the confusion matrix for all of the classifiers.
+
+
 \section{Class Instances of the Vehicles}
 
 Figures~\ref{fig_sedan} to \ref{fig_van} show instances of the classes found in the EDSA dataset.
