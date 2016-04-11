@@ -797,6 +797,9 @@ Figure~\ref{fig_template_visualization} shows a visualization of the instances i
 
 The visualization shows the high variance in the features of sedan instances (green) as seen in their varying sizes. Bus instances (blue) were distant from the main cluster and are easily discriminated by their large size. Two clusters of the other instances (red) can easily be seen: one that clusters around $size = 1$ which is interpreted to be van instances, and one that clusters around $size = 0.25$ which is interpreted to be motorcycle instances. With the number of vehicle instances in the dataset for SUVs (orange), trucks (gray), and jeeps(yellow), the results show that their size and linearity features are clustered together and are not yet sufficient for classification.
 
+\section{Contribution}
+
+This research was able to develop a system for vehicle classification and counting. It has three (3) modules: core, annotation, and evaluation. The core module is capable of performing the classification approach described in section~\ref{}. However, classification on a new video dataset will mean that it will have a new camera perspective. A different camera perspective means that the features recorded on one dataset is different for another dataset. To allow the user to encode new entries to the vehicle template library, the annotation module allows the user to give the true classifications for blobs collected from a dataset. The last module is the evaluation module, which allows the user to annotate the classification performance of the system.  video dataset by capturing vehicles and its features, analysis, and evaluation
 
 % Note that IEEE does not put floats in the very first column - or typically
 % anywhere on the first page for that matter. Also, in-text middle ("here")
