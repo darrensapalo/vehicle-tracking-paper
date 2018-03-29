@@ -350,22 +350,20 @@
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
-
 \begin{document}
 %
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
-\title{Automatic Vehicle Identification and Classification}
-
+\title{Chelonia mydas: An investigative research into inter-species relations of a green sea turtle}
 
 % author names and affiliations
 % use a multiple column layout for up to three different
 % affiliations
 \author{\IEEEauthorblockN{Darren Karl A. Sapalo}
-\IEEEauthorblockA{College of Computer Studies\\
-De La Salle University, Manila\\
-2401 Taft Ave, Malate, Manila, 1004 Metro Manila\\
-Email: darren\_karl\_sapalo@dlsu.edu.ph}
+\IEEEauthorblockA{College of Koala Studies\\
+Mammalia University, Sydney\\
+1638 Steve Irwin Way, Beerwah QLD 4519, Australia\\
+Email: darren.sapalo@gmail.com}
 
 % \and
 % \IEEEauthorblockN{Dr. Joel Ilao}
@@ -381,12 +379,12 @@ Email: darren\_karl\_sapalo@dlsu.edu.ph}
 
 \begin{abstract}
 %\boldmath
-This paper presents an automatic vehicle identification and classification system to be able to estimate the volume of vehicular traffic from video sequences. The two primary goals of this research is (1) to be able to classify vehicles commonly found in the Philippines into six classifications: sedan, bus, jeep, truck, SUV, and others; and (2) to be able to estimate the number of vehicles that pass the road. The video processing is done offline (i.e. not in real-time) and relies on manual calibration of lane dividing lines. The primary reference (technical paper) of this automatic traffic surveillance system used two features: size and linearity. This extension research reports design challenges of automatic traffic surveillance systems in the Philippine context and offers its recommendations and opportunities for future work.
+This paper presents a quantitative and qualitative analysis of the results of prolonged inter-species relations with close proximity between a green sea turtle, Chelonia mydas, and the vulnerable species koala, Phascolarctos cinereus. The primary goal of this research is to evaluate the quality of the relationship based on defined criterias. The data of the relationship is collected manually daily. The primary reference of this research is based on earlier work that focused on the phermones interactions between the two critters. This research reports interesting challenges in the succeeding years of the two animals and unique opportunities to improve the over-all achievement of a loving, stable, and God-centric relationship between two differing species.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
 \begin{IEEEkeywords}
-Intelligent traffic systems, image processing, vehicle classification, vehicle counting
+Chelonia mydas, Testudines, Phascolarctos cinereus, relationship quality
 \end{IEEEkeywords}
 
 
@@ -405,81 +403,89 @@ Intelligent traffic systems, image processing, vehicle classification, vehicle c
 \IEEEpeerreviewmaketitle
 
 \section{Introduction}
-A goal of intelligent transportation systems is to extract traffic information such as traffic density from video streams of traffic \cite{Jun-Wei}. Traffic surveillance systems aim to detect, track, and classify vehicles. Being able to detect and classify vehicles can aid in estimating traffic density and pollution levels in cities and can help traffic enforcers coordinate traffic flow.
+There has been much research on inter-species relationship, studying how different species interact with each other \cite{Sapalo,Jevbratt}. In the case of \cite{Jevbratt}, humans and animals collaborated together in producing art. This research focuses on exploring the future work of \cite{Sapalo}: In 2015, a research was conducted on the interactions of the phermones between a koala and a turtle that found promising results of high positive attraction between the two, recommending that future work observe the the unusual bond built upon love, trust, and affection. Although the initial work by \cite{Sapalo} had questionable methodology and evaluation approaches, the direction of the research is of high value. This research introduces an alternative evaluation approach and relies on better quantitative and qualitative analysis.
 
 \section{Methodology}
 \label{sec:methodology}
-The vehicle identification and classification approach is based on the research of \cite{Jun-Wei}.
+The approach of this research is split in two: (1) qualitative analysis of the individual species, (2) a quantitative analysis of the relationship between the two.
 
 \subsection{Data Collection}
 
-In this research, there were three (3) RGB video dataset collected, lasting an average of around three (3) minutes using a hand-held Samsung Galaxy S4 smart phone. The initial resolution of the videos were 1920x1080 and were reduced to 480x270. The video datasets were recorded from three places: the first video dataset was collected from the fourth floor of the Gokongwei Building of De La Salle University, Manila (DLSU) facing Taft Avenue. The first dataset covers only one side of the road, with only one general direction of vehicle movement.
+This section describes how the data was collected. Two different sets of data was collected for analysis: the quantitative and qualitative dataset.
 
-\begin{figure}[!h]
-\centering
-% \includegraphics[width=2.5in]{myfigure}
-\includegraphics[width=3in]{dataset1_sample.png}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-\caption{Problem of occlusion: Electrical cables and parked vehicles in the Gokongwei dataset}
-\label{fig_electrical_cables}
-\end{figure}
-
-\textbf{Gokongwei Dataset.} The first dataset inherently had problems of occlusion and presented common vehicle behavior based on the location: there were some electrical lines that occluded the road and vehicles and there were also some vehicles that would double-park (parking beside another parked vehicle). Figure~\ref{fig_electrical_cables} shows how the region of interest has been reduced, and how parked vehicles can affect vehicle flow on the road.
-
-\textbf{Buendia Dataset.} The second venue for data collection was on the Light Rail Transit 1, Buendia Station, facing the Makati Central Business District. This dataset was able to capture both sides of the road, capturing two directions of vehicle movement left road (moving downwards) and the right road (moving upwards). This dataset proved to be better than the first one because it did not have the electrical cables that added occlusion. However, because there was an intersection underneath the LRT station, cars on one side of the two roads frequently had stalled vehicles because of the traffic stoplight as seen in figure~\ref{fig_traffic}. This will greatly affect segmentation based on background differencing. Common vehicles in the second dataset are sedans, jeeps, motorcycles, buses, SUVs, trucks, and others, ordered by most frequent to least frequent.
+\subsubsection{Quantitative dataset}
+The data was manually collected after much introspection and personal reflection of the Phascolarctos (Koala). A daily post-evening interview was conducted since June 28, 2017 until the submission of this research on August 2, 2017. Because the data was collected from a singular source (the Koala), there is no opportunity to analyze the inter-species relationship evaluation agreement to avoid bias and a singular perspective on the relationship. We leave this challenge to future work to address.
 
 
 \begin{figure}[!h]
 \centering
 % \includegraphics[width=2.5in]{myfigure}
-\includegraphics[width=3in]{dataset2_sample.png}
+\includegraphics[width=3in]{figures/turtle-badass.jpg}
 % where an .eps filename suffix will be assumed under latex, 
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
-\caption{Problem of stalled vehicles: Traffic has accumulated on the southbound road because of the stoplight in the Buendia dataset}
-\label{fig_traffic}
+\caption{The turtle is a real badass that you shouldn't mess with}
+\label{fig:turtle_badass}
 \end{figure}
 
-\begin{figure}[!ht]
+
+\subsubsection{Qualitative dataset}
+The two species were observed individually while they were separated. The findings of the character and personality traits of the two was surprisingly different when the two are separated and is also different when they are chugether.
+
+Although the captured images of the two species show anthropomorphic characteristics and behaviors, there are unique traits that only the animals have. The images captured are limited because of many factors: the koala claims that the turtle was camera shy, but more likely it is simply a failure to capture images.
+
+An example instance from the qualitative dataset is shown above in figure~\ref{fig:turtle_badass}.
+
+\subsection{Individual characteristics and behavioral assessment}
+
+Using the qualitative dataset, we can see the characteristics of the test subjects in their natural habitat. We perform this study in the absence of the partner subject.
+
+
+\begin{figure}[]
 \centering
 % \includegraphics[width=2.5in]{myfigure}
-\includegraphics[width=3in]{dataset2_jeeps.png}
+\includegraphics[width=2.5in]{figures/koala-yawning.jpg}
 % where an .eps filename suffix will be assumed under latex, 
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
-\caption{Problem of parked vehicles: Vehicles such as jeeps and buses park on the side of road and in the middle of lanes to load and alight passengers}
-\label{fig_jeeps}
+\caption{The koala is a sleepy animal}
+\label{fig:koala_sleepy}
 \end{figure}
 
-Another issue with this dataset is that jeeps park on the side of the road as seen in figure~\ref{fig_jeeps}.  These parked vehicles waiting for passengers to board and alight will adversely affect the segmentation process. The background modeling module will have erroneous results as vehicles that do not move for a long time are gradually learned as part of the background.
-
-\textbf{EDSA Dataset.} The third venue for data collection was on top of a walkway across EDSA Avenue, near Evangelista Street, Makati City. The video sequence faces northbound with vehicles moving southbound and lasts approximately three minutes for a total of 3567 frames. Common vehicles in the third dataset are sedans, motorcycles, SUVs, jeeps, buses, and trucks, ordered by most frequent to least frequent.
-
-
-The common vehicles in the Philippines can be categorized as \textit{sedans}, \textit{buses}, \textit{jeeps}, \textit{SUVs}, \textit{trucks}, and \textit{others}. These are the classes used by this system for vehicle classification. An example of these classes are shown in figures~\ref{fig_sedan} to \ref{fig_van}. The \textit{others} class includes vehicles such as motorcycles and vans.
+\subsubsection{Sleepy Koala}
+In figure~\ref{fig:koala_sleepy}, we find that the koala likes to sleep. This is not a new finding but it is a confirmation that the koala is not irregular: It behaves similarly to other koalas.
 
 
-\begin{figure}[!ht]
+\begin{figure}[]
 \centering
 % \includegraphics[width=2.5in]{myfigure}
-\includegraphics[width=3in]{dataset3_sample.png}
+\includegraphics[width=2.5in]{figures/koala-clingy.jpg}
 % where an .eps filename suffix will be assumed under latex, 
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
-\caption{Vehicles in EDSA Avenue moving southbound. There were no parked or stalled vehicles in this dataset.}
-\label{fig_edsa}
+\caption{The koala is clingy with the important things: like a branch}
+\label{fig:koala_clingy}
 \end{figure}
 
-Most of the noise in the traffic dataset was caused either camera movements caused by the hand, or by erroneous re-focusing of the imaging device (Samsung Galaxy S4). Whenever the camera re-focused, there were significant illumination changes in the data. This occurred in tests when using other imaging devices as well (iPhone 5s).
+\subsubsection{Clingy Koala}
+In figure~\ref{fig:koala_clingy}, we see the koala clinging very firmly on its branches. This is a characteristic that is very strong in koala behavior, which transfers from standard koala things like trees, branches, leaves to interspecies interaction such as clinging on to toes, hugging partners, and the unique behavior called ``gigil''.
 
-In the study of \cite{Jun-Wei}, shadows were very prominent in their traffic video dataset. They propose a shadow elimination algorithm that replaces the pixel value on the region of interest with the pixel value on the background model if it has a high probability that it is a shadow pixel. The probability of being a shadow pixel was computed based on the mean and variance of shadow pixels acquired from numerous training data on shadows.
 
-\subsection{Stabilization}
-First, the video dataset was stabilized so that small camera movements caused by the minimal shaking of the camera can be reduced, if not removed. In the data collection of the EDSA dataset, a makeshift tripod was used to remove small camera movements caused by hand movements.
+\begin{figure}[]
+\centering
+% \includegraphics[width=2.5in]{myfigure}
+\includegraphics[width=2.5in]{figures/koala-sad.jpg}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{The koala is clingy with the important things: like a branch}
+\label{fig:koala_sad}
+\end{figure}
 
-\subsection{Background Modeling}
+\subsubsection{Sad Koala}
+In figure~\ref{fig:koala_sad}, we find the koala when he is sad. This is often times occurs when things become too overwhelming for him. Sometimes, he tries to cling on to too many branches from too many trees and it becomes impossible to hold on to too many things. It is at this point that the Koala realizes its limits and feels sad. This also happens when the Koala could not find the Turtle, or when the Koala feels like there is no one to understand and listen to him.
+
+\subsection{Quality of Relationship analysis}
 Once the video has been stabilized and the movement between frames has been reduced, background modeling can be performed. The video is first converted to grayscale before the background model is acquired. There are various ways to achieve a background model from a video sequence. Initial experiments performed a simple \textbf{weighted background learning approach} to acquire the background model $B_i$ at time $i$:
 
 $$
@@ -962,17 +968,11 @@ The author would like to thank Dr. Joel Ilao of the College of Computer Studies,
 % (used to reserve space for the reference number labels box)
 \begin{thebibliography}{1}
 
-\bibitem{Jun-Wei}
-Jun-Wei Hsieh, Shih-Hao Yu, Yung-Sheng Chen and Wen-Fong Hu, "Automatic traffic surveillance system for vehicle tracking and classification," in IEEE Transactions on Intelligent Transportation Systems, vol. 7, no. 2, pp. 175-187, June 2006.
+\bibitem{Sapalo}
+Darren Karl Sapalo, "Investigation on Phermones Interaction between Koala and Turtle," in ACI Third International Conference on Animal-Computer Interaction, vol. 7, no. 2, pp. 175-187, October 5, 2015.
 
-\bibitem{Sobral}
-Sobral, Andrews. BGSLibrary: An OpenCV C++ Background Subtraction Library. IX Workshop de Visão Computacional (WVC'2013), Rio de Janeiro, Brazil, Jun. 2013.
-
-\bibitem{Math}
-W. H. Press, S. A. Teukolsky, W. T. Vetterling, and B. P. Flannery, Numerical Recipes in C—The Art of Scientific Computing. Cambridge, U.K.: Cambridge Univ. Press, 1992.
-
-\bibitem{Manzanera}
-Antoine Manzanera and Julien C. Richefeu. A new motion detection algorithm based on Σ-Δ background estimation. Pattern Recognition Lett. 28, 3 (February 2007), p. 320-328.
+\bibitem{Jevbratt}
+Lisa Jevbratt, "Interspecies Collaboration – Making Art Together with Nonhuman Animals" in Interspecies Collaboration – Making Art Together with Nonhuman Animals, October 2009.
 \end{thebibliography}
 
 % biography section
